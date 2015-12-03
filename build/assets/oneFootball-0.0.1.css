@@ -6753,6 +6753,13 @@ button.close {
  *
  * TODO: In a later version of this boilerplate, I'd like to automate this.
  */
-.homeClass {
-  margin: 0 0 0 0;
+body {
+  background-color: #eeeeee;
+}
+.oneFootball .knockout .round {
+  margin-bottom: 15px;
+}
+.oneFootball .game {
+  background-color: white;
+  padding: 10px;
 }
