@@ -1,0 +1,44 @@
+<div class="">
+    
+    <h1>OneFootball Stage Visualizer</h1>
+    <button class="btn btn-success btn-default" ng-click="stage.download('/assets/data/brackets.json')">
+        Start
+    </button>
+    <div class="row round no-mobile">
+        <div class="col-md-12" ng-repeat="(count, octave) in octaves" ng-if="count < 4">
+            {{ octave.teamHome }} vs {{ octave.teamAway }}
+        </div>
+    </div>
+    <div class="row round">
+        <div class="col-md-12" ng-repeat="(count, quarter) in quarters" ng-if="count < 2">
+            {{ quarter.teamHome }} vs {{ quarter.teamAway }}
+        </div>
+    </div>
+    <div class="row round">
+        <div class="col-md-12" ng-repeat="(count, semiFinal) in semiFinals" ng-if="count < 1">
+            {{ semiFinal.teamHome }} vs {{ semiFinal.teamAway }}
+        </div>
+    </div>
+
+    <div class="row round">
+        <div class="col-md-4 col-md-offset-4" ng-repeat="fin in final">
+            {{ fin.teamHome }} vs {{ fin.teamAway }}
+        </div>
+    </div>
+
+    <div class="row round">
+        <div class="col-md-12" ng-repeat="(count, semiFinal) in semiFinals" ng-if="count >= 1">
+            {{ semiFinal.teamHome }} vs {{ semiFinal.teamAway }}
+        </div>
+    </div>
+    <div class="row round">
+        <div class="col-md-12" ng-repeat="(count, quarter) in quarters" ng-if="count >= 2">
+            {{ quarter.teamHome }} vs {{ quarter.teamAway }}
+        </div>
+    </div>
+    <div class="row round">
+        <div class="col-md-12" ng-repeat="(count, octave) in octaves" ng-if="count >= 4">
+            {{ octave.teamHome }} vs {{ octave.teamAway }}
+        </div>
+    </div>
+</div>
