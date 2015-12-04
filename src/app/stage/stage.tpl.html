@@ -2,12 +2,18 @@
     <div class="row round">
         <div class="col-md-12">
             <h1>OneFootball Stage Visualizer</h1>
-            <button class="btn btn-success btn-default" ng-click="stage.download('/assets/data/brackets.json')">
-                Start
-            </button>
         </div>
     </div>
-    <div class="row round no-mobile">
+    <div class="row round">
+        <div class="col-md-3" ng-repeat="(count, initial) in initials" ng-if="count < 4">
+            <div class="row">
+                <div class="col-md-6" ng-repeat="half in initial">
+                    <div class="game">{{ half.teamHome.name }} - {{ half.teamAway.name }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row round">
         <div class="col-md-3" ng-repeat="(count, octave) in octaves" ng-if="count < 4">
             <div class="game">{{ octave.teamHome }} - {{ octave.teamAway }}</div>
         </div>
@@ -57,9 +63,18 @@
             </div>
         </div>
     </div>
-    <div class="row round no-mobile">
+    <div class="row round">
         <div class="col-md-3" ng-repeat="(count, octave) in octaves" ng-if="count >= 4">
             <div class="game">{{ octave.teamHome }} - {{ octave.teamAway }}</div>
+        </div>
+    </div>
+    <div class="row round">
+        <div class="col-md-3" ng-repeat="(count, initial) in initials" ng-if="count >= 4">
+            <div class="row">
+                <div class="col-md-6" ng-repeat="half in initial">
+                    <div class="game">{{ half.teamHome.name }} - {{ half.teamAway.name }}</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

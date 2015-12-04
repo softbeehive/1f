@@ -6,12 +6,18 @@ angular.module("stage/stage.tpl.html", []).run(["$templateCache", function($temp
     "    <div class=\"row round\">\n" +
     "        <div class=\"col-md-12\">\n" +
     "            <h1>OneFootball Stage Visualizer</h1>\n" +
-    "            <button class=\"btn btn-success btn-default\" ng-click=\"stage.download('/assets/data/brackets.json')\">\n" +
-    "                Start\n" +
-    "            </button>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"row round no-mobile\">\n" +
+    "    <div class=\"row round\">\n" +
+    "        <div class=\"col-md-3\" ng-repeat=\"(count, initial) in initials\" ng-if=\"count < 4\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-md-6\" ng-repeat=\"half in initial\">\n" +
+    "                    <div class=\"game\">{{ half.teamHome.name }} - {{ half.teamAway.name }}</div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row round\">\n" +
     "        <div class=\"col-md-3\" ng-repeat=\"(count, octave) in octaves\" ng-if=\"count < 4\">\n" +
     "            <div class=\"game\">{{ octave.teamHome }} - {{ octave.teamAway }}</div>\n" +
     "        </div>\n" +
@@ -61,9 +67,18 @@ angular.module("stage/stage.tpl.html", []).run(["$templateCache", function($temp
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"row round no-mobile\">\n" +
+    "    <div class=\"row round\">\n" +
     "        <div class=\"col-md-3\" ng-repeat=\"(count, octave) in octaves\" ng-if=\"count >= 4\">\n" +
     "            <div class=\"game\">{{ octave.teamHome }} - {{ octave.teamAway }}</div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row round\">\n" +
+    "        <div class=\"col-md-3\" ng-repeat=\"(count, initial) in initials\" ng-if=\"count >= 4\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-md-6\" ng-repeat=\"half in initial\">\n" +
+    "                    <div class=\"game\">{{ half.teamHome.name }} - {{ half.teamAway.name }}</div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
