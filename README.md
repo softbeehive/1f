@@ -47,4 +47,4 @@ Good luck!
 
 ## Issues
 
-Please create an issue withing this repository, appreciate your help
+Please create an issue within this repository, appreciate your help

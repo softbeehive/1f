@@ -19,13 +19,15 @@
       should be contained lower down.
     */
 
-    init();
-
     // Module's public methods
     var stage = this;
     stage.download = download;
     stage.final = final;
     stage.pure = pureStage;
+    stage.chunk = chunker;
+    stage.build = build;
+
+    init();
 
     function init() {
       /*
@@ -33,6 +35,7 @@
         controller starts. Avoid writing any code outside of this function that
         executes immediately.
       */
+      stage.download('/assets/data/brackets.json');
     }
 
     // All stages data getter
@@ -40,17 +43,28 @@
       $http.get(url)
         .success(function(data, status, headers, config) {
           // called asynchronously when the response is available
-          $scope.matches = data;
-          $scope.final = stage.final();
-          $scope.semiFinals = stage.pure($scope.final);
-          $scope.quarters = stage.pure($scope.semiFinals);
-          $scope.octaves = stage.pure($scope.quarters);
+          stage.build(data);
         })
         .error(function(data, status, headers, config) {
           // called asynchronously when the response is available
         });
 
       return $scope.matches;
+    }
+
+    /*
+      Prepare data for view, having it in its own function is convenient 
+      because its items are dependent and logics is not mixed
+    */
+    function build(data) {
+      if (typeof data !== 'undefined') {
+        $scope.matches = data;
+        $scope.final = stage.final();
+        $scope.semiFinals = stage.pure($scope.final);
+        $scope.quarters = stage.pure($scope.semiFinals);
+        $scope.octaves = stage.pure($scope.quarters);
+        $scope.initials = stage.chunk(stage.pure($scope.octaves), 2);
+      }
     }
 
     /*
@@ -100,6 +114,29 @@
         game and its history within tournament
       */
       return stagePool;
+    }
+
+    /*
+      In order to group collections of data there is a method to help.
+      Chunker accept two arguments: supply it with data to group and step size
+    */
+    function chunker(stuffToGroup, step) {
+      var chunked = [];
+
+      if (typeof stuffToGroup !== 'undefined' && typeof step !== 'undefined') {
+        var groupL = stuffToGroup.length;
+        step = parseInt(step, 10);
+
+        for (var i = 0; i < groupL; i += step) {
+          chunked.push(stuffToGroup.slice(i, i + step));
+        }
+      }
+
+      /*
+        Returns [Array[], Array[], ...] where each subarray contains set objects
+        with data for certain game and its history within tournament
+      */
+      return chunked;
     }
 
   });
